@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 		if (opcode == NULL)
 			continue;
 		arg = strtok(NULL, delim);
-		if (arg != NULL)
+		if (arg != NULL && !isalpha(arg[0]))
 		{
 			if (!isdigit(arg[0]))
 				push_error(line_num);
