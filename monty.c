@@ -31,15 +31,18 @@ int main(int argc, char **argv)
 		opcode = strtok(line, delim);
 		if (opcode == NULL)
 			continue;
-		arg = strtok(NULL, delim);
-		if (arg != NULL && !isalpha(arg[0]))
+		if (strcmp(opcode, "push") == 0)
 		{
-			if (!isdigit(arg[0]) && arg[0] != '-')
+			arg = strtok(NULL, delim);
+			if (arg != NULL && !isalpha(arg[0]))
+			{
+				if (!isdigit(arg[0]) && ispunct(arg[0]))
+					push_error(fp, line, line_num, stack);
+				global = atoi(arg);
+			}
+			else if (arg == NULL)
 				push_error(fp, line, line_num, stack);
-			global = atoi(arg);
 		}
-		else if (arg == NULL && strcmp(opcode, "push") == 0)
-			push_error(fp, line, line_num, stack);
 		if (validate_exec_opcode(opcode, &stack, line_num) != 1)
 			opcode_error(fp, line, opcode, line_num, stack);
 	}
