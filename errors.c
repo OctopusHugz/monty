@@ -48,3 +48,13 @@ void push_error(int line_num)
 	fprintf(stderr, "L%d: usage: push integer\n", line_num);
 	exit(EXIT_FAILURE);
 }
+
+/**
+ * malloc_error - prints malloc error message
+ **/
+
+void malloc_error(void)
+{
+	fprintf(stderr, "Error: malloc failed\n");
+	exit(EXIT_FAILURE);
+}
