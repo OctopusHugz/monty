@@ -53,11 +53,11 @@ void open_error(char *filename);
 
 void argc_error(void);
 
-void opcode_error(FILE *fp, char *line, char *opcode, int line_num);
+void opcode_error(FILE *fp, char *line, char *opcode, int line_num, stack_t *head);
 
 void free_stack(stack_t *head);
 
-void push_error(int line_num);
+void push_error(FILE *fp, char *line, int line_num, stack_t *head);
 
 void malloc_error(void);
 
