@@ -1,4 +1,5 @@
 #include "monty.h"
+int global;
 
 /**
  * main - runs the monty program
@@ -11,54 +12,55 @@
 int main(int argc, char **argv)
 {
 	FILE *fp;
-	char *line = NULL, *delim = " \n", *arg;
+	char *line = NULL, *delim = " \n", *arg, *opcode;
 	size_t len = 0;
 	int line_num = 0;
-	stack_t stack, *stack_ptr = &stack;
-	instruction_t instructions;
+	stack_t *stack = NULL;
 
+	if (argc < 2)
+		argc_error();
 	if (argv[1])
 		fp = fopen(argv[1], "r");
-
 	if (fp == NULL) /* OR IF STAT/ACCESS FAILS, PRINT THIS ERROR MESSAGE */
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
-	if (argc < 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
+		open_error(argv[1]);
 	while (getline(&line, &len, fp) != -1)
 	{
 		line_num++;
-		instructions.opcode = strtok(line, delim);
+		if (strcmp(line, "\n") == 0)
+		{
+			printf("empty line: %s\n", line);
+			continue;
+		}
+		opcode = strtok(line, delim);
 		arg = strtok(NULL, delim);
 		if (arg != NULL)
-			stack.n = atoi(arg);
-		if (validate_exec_opcode(instructions, &stack_ptr, line_num) != 1)
 		{
-			fprintf(stderr, "L%d: unknown instruction %s\n", line_num, instructions.opcode);
-			fclose(fp);
-			free(line);
-			exit(EXIT_FAILURE);
+			if (!isdigit(arg[0]))
+				push_error(line_num);
+			global = atoi(arg);
 		}
+		else
+			push_error(line_num);
+
+		if (validate_exec_opcode(opcode, &stack, line_num) != 1)
+			opcode_error(fp, line, opcode, line_num);
 	}
 	fclose(fp);
 	free(line);
+	free_stack(stack);
 	return (0);
 }
 
 /**
  * validate_exec_opcode - searches for valid opcode in struct and runs function
  * @opcode: opcode read from getline/strtok
- * @arg: arg read from getline/strtok
+ * @stack: pointer to stack structure
+ * @line_num: line number of opcode instruction
  *
  * Return: 1 if true, -1 otherwise
  **/
 
-int validate_exec_opcode(instruction_t instructions, stack_t **stack, int line_num)
+int validate_exec_opcode(char *opcode, stack_t **stack, int line_num)
 {
 	int i = 0, valid = -1;
 	instruction_t commands[] = {
@@ -70,8 +72,7 @@ int validate_exec_opcode(instruction_t instructions, stack_t **stack, int line_n
 
 	while (commands[i].opcode)
 	{
-		printf("commands[i].opcode is: %s\n", commands[i].opcode);
-		if (strcmp(commands[i].opcode, instructions.opcode) == 0)
+		if (strcmp(commands[i].opcode, opcode) == 0)
 		{
 			commands[i].f(stack, line_num);
 			valid = 1;
@@ -82,26 +83,21 @@ int validate_exec_opcode(instruction_t instructions, stack_t **stack, int line_n
 	return (valid);
 }
 
-void push(stack_t **stack, unsigned int line_number)
+/**
+ * free_stack - free doubly linked list
+ * @head: pointer to head node
+ */
+void free_stack(stack_t *head)
 {
-	printf("line_number: %d --> stack.n is: %d --> ", line_number, (*stack)->n);
-	printf("Running push function!\n\n\n");
-}
+	stack_t *temp, *node;
 
-void pall(stack_t **stack, unsigned int line_number)
-{
-	printf("line_number: %d --> stack.n is: %d --> ", line_number, (*stack)->n);
-	printf("Running pall function!\n\n\n");
-}
-
-void pint(stack_t **stack, unsigned int line_number)
-{
-	printf("line_number: %d --> stack.n is: %d --> ", line_number, (*stack)->n);
-	printf("Running pint function!\n\n\n");
-}
-
-void pop(stack_t **stack, unsigned int line_number)
-{
-	printf("line_number: %d --> stack.n is: %d --> ", line_number, (*stack)->n);
-	printf("Running pop function!\n\n\n");
+	if (head == NULL)
+		return;
+	node = head;
+	while (node)
+	{
+		temp = node;
+		node = node->next;
+		free(temp);
+	}
 }

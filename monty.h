@@ -4,6 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
+
+extern int global;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -51,6 +54,8 @@ void argc_error(void);
 
 void opcode_error(FILE *fp, char *line, char *opcode, int line_num);
 
-extern int global;
+void free_stack(stack_t *head);
+
+void push_error(int line_num);
 
 #endif /* MONTY_H */
