@@ -58,4 +58,6 @@ void free_stack(stack_t *head);
 
 void push_error(int line_num);
 
+void malloc_error(void);
+
 #endif /* MONTY_H */
