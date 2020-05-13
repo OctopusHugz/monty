@@ -13,9 +13,8 @@ void open_error(char *filename)
 
 /**
  * argc_error - prints usage error message
- *
- *
- */
+ **/
+
 void argc_error(void)
 {
 	fprintf(stderr, "USAGE: monty file\n");
@@ -36,5 +35,16 @@ void opcode_error(FILE *fp, char *line, char *opcode, int line_num)
 	fprintf(stderr, "L%d: unknown instruction %s\n", line_num, opcode);
 	fclose(fp);
 	free(line);
+	exit(EXIT_FAILURE);
+}
+
+/**
+ * push_error - prints push error message
+ * @line_num: line num of invalid push opcode
+ **/
+
+void push_error(int line_num)
+{
+	fprintf(stderr, "L%d: usage: push integer\n", line_num);
 	exit(EXIT_FAILURE);
 }
