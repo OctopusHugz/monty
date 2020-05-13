@@ -12,7 +12,7 @@ void push(stack_t **stack, unsigned int line_number)
 
 	(void)line_number;
 	if (new == NULL)
-		return;
+		malloc_error();
 
 	new->n = global;
 	new->prev = NULL;
