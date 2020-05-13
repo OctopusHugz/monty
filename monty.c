@@ -39,9 +39,8 @@ int main(int argc, char **argv)
 				push_error(line_num);
 			global = atoi(arg);
 		}
-		else
+		else if (arg == NULL && strcmp(opcode, "push") == 0)
 			push_error(line_num);
-
 		if (validate_exec_opcode(opcode, &stack, line_num) != 1)
 			opcode_error(fp, line, opcode, line_num);
 	}
