@@ -53,7 +53,8 @@ void open_error(char *filename);
 
 void argc_error(void);
 
-void opcode_error(FILE *fp, char *line, char *opcode, int line_num, stack_t *head);
+void opcode_error(FILE *fp, char *line, char *opcode,
+				  int line_num, stack_t *head);
 
 void free_stack(stack_t *head);
 
