@@ -21,16 +21,13 @@ int main(int argc, char **argv)
 		argc_error();
 	if (argv[1])
 		fp = fopen(argv[1], "r");
-	if (fp == NULL) /* OR IF STAT/ACCESS FAILS, PRINT THIS ERROR MESSAGE */
+	if (fp == NULL)
 		open_error(argv[1]);
 	while (getline(&line, &len, fp) != -1)
 	{
 		line_num++;
 		if (strcmp(line, "\n") == 0)
-		{
-			printf("empty line: %s\n", line);
 			continue;
-		}
 		opcode = strtok(line, delim);
 		arg = strtok(NULL, delim);
 		if (arg != NULL)
