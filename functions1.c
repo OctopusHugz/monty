@@ -61,8 +61,14 @@ void pall(stack_t **stack, unsigned int line_number)
 
 void pint(stack_t **stack, unsigned int line_number)
 {
-	printf("line_number: %d --> stack.n is: %d --> ", line_number, (*stack)->n);
-	printf("Running pint function!\n\n\n");
+	(void)line_number;
+
+	if (*stack == NULL || stack == NULL) /* MOVE TO ERRORS.C OR ERRORS2.C */
+	{
+		dprintf(STDERR_FILENO, "L%d: can't pint, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", (*stack)->n);
 }
 
 /**
@@ -73,6 +79,20 @@ void pint(stack_t **stack, unsigned int line_number)
 
 void pop(stack_t **stack, unsigned int line_number)
 {
-	printf("line_number: %d --> stack.n is: %d --> ", line_number, (*stack)->n);
-	printf("Running pop function!\n\n\n");
+	stack_t *node = *stack, *temp = *stack;
+
+	if (*stack == NULL) /* MOVE TO ERRORS.C OR ERRORS2.C */
+	{
+		dprintf(STDERR_FILENO, "L%d: can't pop an empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	if (node->next)
+	{
+		node = node->next;
+		*stack = node;
+		node->prev = NULL;
+	}
+	else
+		*stack = NULL;
+	free(temp);
 }

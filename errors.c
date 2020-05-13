@@ -27,25 +27,36 @@ void argc_error(void)
  * @line: line count
  * @opcode: opcode searched for
  * @line_num: line num of invalid opcode
+ * @head: pointer to head/top of the stack
  *
  */
-void opcode_error(FILE *fp, char *line, char *opcode, int line_num)
+void opcode_error(FILE *fp, char *line, char *opcode,
+				  int line_num, stack_t *head)
 {
 
 	dprintf(STDERR_FILENO, "L%d: unknown instruction %s\n", line_num, opcode);
 	fclose(fp);
 	free(line);
+	free_stack(head);
 	exit(EXIT_FAILURE);
 }
 
 /**
  * push_error - prints push error message
+ * @fp: file pointer
+ * @line: line count
  * @line_num: line num of invalid push opcode
+ * @head: pointer to top of the stack
+ *
  **/
 
-void push_error(int line_num)
+void push_error(FILE *fp, char *line, int line_num, stack_t *head)
 {
+	/* free_stack(*head); */
 	dprintf(STDERR_FILENO, "L%d: usage: push integer\n", line_num);
+	fclose(fp);
+	free(line);
+	free_stack(head);
 	exit(EXIT_FAILURE);
 }
 
