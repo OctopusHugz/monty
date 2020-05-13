@@ -29,6 +29,8 @@ int main(int argc, char **argv)
 		if (strcmp(line, "\n") == 0)
 			continue;
 		opcode = strtok(line, delim);
+		if (opcode == NULL)
+			continue;
 		arg = strtok(NULL, delim);
 		if (arg != NULL)
 		{
