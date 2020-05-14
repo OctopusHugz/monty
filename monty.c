@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 			if ((arg == NULL) || (!isdigit(arg[0]) && arg[0] != '-'))
 				push_error(fp, line, line_num, stack);
 			else if (arg[0] == '-' && !isdigit(arg[1]))
-				push_error(fp, line, line_num, stack); 
+				push_error(fp, line, line_num, stack);
 			global = atoi(arg);
 		}
 		if (validate_exec_opcode(opcode, &stack, line_num) != 1)
