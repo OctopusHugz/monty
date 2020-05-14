@@ -54,7 +54,7 @@ void pchar(stack_t **stack, unsigned int line_number)
 		global = -1;
 		return;
 	}
-	else if ((*stack)->n > 255)
+	else if ((*stack)->n > 255 || (*stack)->n < 0)
 	{
 		printf("L%d: can't pchar, value out of range\n", line_number);
 		global = -1;
