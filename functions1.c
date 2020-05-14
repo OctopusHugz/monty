@@ -41,7 +41,6 @@ void push(stack_t **stack, unsigned int line_number)
 
 void pall(stack_t **stack, unsigned int line_number)
 {
-	size_t num_nodes = 0;
 	stack_t *current;
 
 	(void)line_number;
@@ -51,7 +50,6 @@ void pall(stack_t **stack, unsigned int line_number)
 	while (current)
 	{
 		printf("%d\n", current->n);
-		num_nodes++;
 		current = current->next;
 	}
 }
