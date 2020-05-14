@@ -52,17 +52,6 @@ void sub(stack_t **stack, unsigned int line_number)
 	diff = (*stack)->n;
 	pop(stack, line_number);
 	diff -= (*stack)->n;
-	/* if (num_nodes > 2)
-	{
-		pop(stack, line_number);
-		sum += (*stack)->n;
-	}
-	else
-	{
-		sum += (*stack)->next->n;
-
-	} */
-
 	(*stack)->n = diff;
 }
 
