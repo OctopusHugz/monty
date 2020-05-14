@@ -46,7 +46,10 @@ void pall(stack_t **stack, unsigned int line_number)
 
 	(void)line_number;
 	if (*stack == NULL || stack == NULL)
+	{
+		global = -2;
 		return;
+	}
 	current = *stack;
 	while (current)
 	{

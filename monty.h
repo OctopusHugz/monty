@@ -55,6 +55,14 @@ void add(stack_t **stack, unsigned int line_number);
 
 void nop(stack_t **stack, unsigned int line_number);
 
+void sub(stack_t **stack, unsigned int line_number);
+
+void divide(stack_t **stack, unsigned int line_number);
+
+void mul(stack_t **stack, unsigned int line_number);
+
+void mod(stack_t **stack, unsigned int line_number);
+
 void open_error(char *filename);
 
 void argc_error(void);
@@ -71,5 +79,13 @@ void push_error(FILE *fp, char *line, int line_num, stack_t *head);
 void malloc_error(void);
 
 void add_error(int line_num, stack_t *head);
+
+void sub_error(int line_num, stack_t *head);
+
+void div_error(int line_num, stack_t *head);
+
+void mul_error(int line_num, stack_t *head);
+
+void mod_error(int line_num, stack_t *head);
 
 #endif /* MONTY_H */

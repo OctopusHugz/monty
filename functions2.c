@@ -3,7 +3,7 @@
 /**
  * add - adds top two elements of the stack
  * @stack: stack to add from
- * @line_number: line number of nop opcodei
+ * @line_number: line number of add opcode
  **/
 void add(stack_t **stack, unsigned int line_number)
 {
@@ -16,13 +16,18 @@ void add(stack_t **stack, unsigned int line_number)
 	}
 
 	sum += (*stack)->n;
-	if (num_nodes > 2)
+	pop(stack, line_number);
+	sum += (*stack)->n;
+	/* if (num_nodes > 2)
 	{
 		pop(stack, line_number);
 		sum += (*stack)->n;
 	}
 	else
+	{
 		sum += (*stack)->next->n;
+
+	} */
 
 	(*stack)->n = sum;
 }
@@ -36,4 +41,100 @@ void nop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;
+}
+
+/**
+ * sub - subtracts top two elements of the stack
+ * @stack: stack to add from
+ * @line_number: line number of sub opcode
+ **/
+void sub(stack_t **stack, unsigned int line_number)
+{
+	int diff = 0, num_nodes = stack_size(*stack);
+
+	if (*stack == NULL || num_nodes < 2)
+	{
+		sub_error(line_number, *stack);
+		return;
+	}
+
+	diff = (*stack)->n;
+	pop(stack, line_number);
+	diff -= (*stack)->n;
+	/* if (num_nodes > 2)
+	{
+		pop(stack, line_number);
+		sum += (*stack)->n;
+	}
+	else
+	{
+		sum += (*stack)->next->n;
+
+	} */
+
+	(*stack)->n = diff;
+}
+
+/**
+ * div - divides top two elements of the stack
+ * @stack: stack to add from
+ * @line_number: line number of sub opcode
+ **/
+void divide(stack_t **stack, unsigned int line_number)
+{
+	int quotient = 0, num_nodes = stack_size(*stack);
+
+	if (*stack == NULL || num_nodes < 2)
+	{
+		div_error(line_number, *stack);
+		return;
+	}
+
+	quotient = (*stack)->n;
+	pop(stack, line_number);
+	quotient /= (*stack)->n;
+	/* if (num_nodes > 2)
+	{
+		pop(stack, line_number);
+		sum += (*stack)->n;
+	}
+	else
+	{
+		sum += (*stack)->next->n;
+
+	} */
+
+	(*stack)->n = quotient;
+}
+
+/**
+ * mul - multiplies top two elements of the stack
+ * @stack: stack to add from
+ * @line_number: line number of sub opcode
+ **/
+void mul(stack_t **stack, unsigned int line_number)
+{
+	int result = 0, num_nodes = stack_size(*stack);
+
+	if (*stack == NULL || num_nodes < 2)
+	{
+		mul_error(line_number, *stack);
+		return;
+	}
+
+	result = (*stack)->n;
+	pop(stack, line_number);
+	result *= (*stack)->n;
+	/* if (num_nodes > 2)
+	{
+		pop(stack, line_number);
+		sum += (*stack)->n;
+	}
+	else
+	{
+		sum += (*stack)->next->n;
+
+	} */
+
+	(*stack)->n = result;
 }
