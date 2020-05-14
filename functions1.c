@@ -96,3 +96,51 @@ void pop(stack_t **stack, unsigned int line_number)
 		*stack = NULL;
 	free(temp);
 }
+
+/**
+ * swap - swaps the top 2 values of the stack
+ * @stack: stack to swap from
+ * @line_number: line number of swap opcode
+ **/
+
+void swap(stack_t **stack, unsigned int line_number)
+{
+	stack_t *top = *stack, *second = *stack, *third = *stack;
+
+	(void)second;
+	(void)third;
+	if (*stack == NULL) /* MOVE TO ERRORS.C OR ERRORS2.C */
+	{
+		dprintf(STDERR_FILENO, "L%d: can't swap, stack too short\n", line_number);
+		return;
+		/* exit(EXIT_FAILURE); */
+	}
+	second = top->next;
+	if (second)
+	{
+		third = second->next;
+		if (third)
+		{
+
+			third->prev = top;
+			top->prev = second;
+			second->prev = NULL;
+			top->next = third;
+			second->next = top;
+			*stack = second;
+		}
+		else
+		{
+			top->prev = second;
+			second->prev = NULL;
+			top->next = NULL;
+			second->next = top;
+			*stack = second;
+		}
+	}
+	else
+	{
+		/* ONLY 1 NODE IN LIST */
+		dprintf(STDERR_FILENO, "L%d: can't swap, stack too short\n", line_number);
+	}
+}
