@@ -25,17 +25,6 @@ void mod(stack_t **stack, unsigned int line_number)
 	}
 	pop(stack, line_number);
 	mod %= (*stack)->n;
-	/* if (num_nodes > 2)
-	{
-		pop(stack, line_number);
-		sum += (*stack)->n;
-	}
-	else
-	{
-		sum += (*stack)->next->n;
-
-	} */
-
 	(*stack)->n = mod;
 }
 
