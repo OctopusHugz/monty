@@ -52,7 +52,6 @@ void opcode_error(FILE *fp, char *line, char *opcode,
 
 void push_error(FILE *fp, char *line, int line_num, stack_t *head)
 {
-	/* free_stack(*head); */
 	dprintf(STDERR_FILENO, "L%d: usage: push integer\n", line_num);
 	fclose(fp);
 	free(line);
@@ -67,5 +66,4 @@ void push_error(FILE *fp, char *line, int line_num, stack_t *head)
 void malloc_error(void)
 {
 	dprintf(STDERR_FILENO, "Error: malloc failed\n");
-	exit(EXIT_FAILURE);
 }

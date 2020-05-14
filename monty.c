@@ -42,6 +42,13 @@ int main(int argc, char **argv)
 		}
 		if (validate_exec_opcode(opcode, &stack, line_num) != 1)
 			opcode_error(fp, line, opcode, line_num, stack);
+		else if (global == -1)
+		{
+			fclose(fp);
+			free(line);
+			free_stack(stack);
+			exit(EXIT_FAILURE);
+		}
 		num_nodes = stack_size(stack);
 		if ((strcmp(opcode, "swap") == 0 || strcmp(opcode, "add") == 0) && num_nodes < 2) /* TOO LONG */
 		{
