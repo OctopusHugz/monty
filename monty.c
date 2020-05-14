@@ -80,6 +80,12 @@ int validate_exec_opcode(char *opcode, stack_t **stack, int line_num)
 
 	while (commands[i].opcode)
 	{
+		if (strncmp(opcode, "pall", 4) == 0)
+		{
+			commands[1].f(stack, line_num);
+			valid = 1;
+			break;
+		}
 		if (strcmp(commands[i].opcode, opcode) == 0)
 		{
 			commands[i].f(stack, line_num);
