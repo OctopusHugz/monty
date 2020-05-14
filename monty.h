@@ -90,4 +90,6 @@ void mod_error(int line_num, stack_t *head);
 
 void free_close(FILE *fp, char *line, stack_t *stack);
 
+void pchar(stack_t **stack, unsigned int line_number);
+
 #endif /* MONTY_H */

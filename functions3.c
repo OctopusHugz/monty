@@ -40,3 +40,25 @@ void free_close(FILE *fp, char *line, stack_t *stack)
 	free(line);
 	free_stack(stack);
 }
+
+/**
+ * pchar - print character to top of the stack
+ * @stack: stack to add from
+ * @line_number: line number of sub opcode* @line: line count
+ **/
+void pchar(stack_t **stack, unsigned int line_number)
+{
+	if (*stack == NULL)
+	{
+		printf("L%d: can't pchar, stack empty\n", line_number);
+		global = -1;
+		return;
+	}
+	else if ((*stack)->n > 255)
+	{
+		printf("L%d: can't pchar, value out of range\n", line_number);
+		global = -1;
+		return;
+	}
+	printf("%c\n", (*stack)->n);
+}
