@@ -8,7 +8,6 @@
  */
 void add_error(int line_number, stack_t *head)
 {
+	(void)head;
 	dprintf(STDERR_FILENO, "L%d: can't add, stack too short\n", line_number);
-	free_stack(head);
-	exit(EXIT_FAILURE);
 }
