@@ -73,6 +73,8 @@ int validate_exec_opcode(char *opcode, stack_t **stack, int line_num)
 		{"pint", pint},
 		{"pop", pop},
 		{"swap", swap},
+		{"add", add},
+		{"nop", nop},
 		{NULL, NULL}};
 
 	while (commands[i].opcode)
