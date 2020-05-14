@@ -19,14 +19,9 @@ int main(int argc, char **argv)
 
 	if (argc < 2)
 		argc_error();
-	if (argv[1])
-	{
-		if (access(argv[1], R_OK) != 0)
-			open_error(argv[1]);
-	}
 	fp = fopen(argv[1], "r");
 	if (fp == NULL)
-		malloc_error();
+		open_error(argv[1]);
 	while (getline(&line, &len, fp) != -1)
 	{
 		line_num++;
