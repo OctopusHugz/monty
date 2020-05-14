@@ -3,21 +3,27 @@
 /**
  * add - adds top two elements of the stack
  * @stack: stack to add from
- * @line_number: line number of nop opcode
+ * @line_number: line number of nop opcodei
+ * @fp: file pointer
+ * @line: line count
  **/
 void add(stack_t **stack, unsigned int line_number)
 {
 	int sum = 0, num_nodes = stack_len(*stack);
 
 	if (*stack == NULL || num_nodes < 2)
-		dprintf(STDERR_FILENO, "L%d: can't add, stack too short\n", line_number);
+		add_error(line_number, *stack);
 
 	sum += (*stack)->n;
-	pop(stack, line_number);
-	sum += (*stack)->n;
-	pop(stack, line_number);
-	global = sum;
-	push(stack, line_number);
+	if (num_nodes > 2)
+	{
+		pop(stack, line_number);
+		sum += (*stack)->n;
+	}
+	else
+		sum += (*stack)->next->n;
+
+	(*stack)->n = sum;
 }
 
 /**
