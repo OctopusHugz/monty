@@ -88,4 +88,6 @@ void mul_error(int line_num, stack_t *head);
 
 void mod_error(int line_num, stack_t *head);
 
+void free_close(FILE *fp, char *line, stack_t *stack);
+
 #endif /* MONTY_H */

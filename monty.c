@@ -19,10 +19,12 @@ int main(int argc, char **argv)
 
 	if (argc < 2)
 		argc_error();
+	if (access(argv[1], R_OK) != 0)
+		open_error(argv[1]);
 	if (argv[1])
 		fp = fopen(argv[1], "r");
 	if (fp == NULL)
-		open_error(argv[1]);
+		malloc_error();
 	while (getline(&line, &len, fp) != -1)
 	{
 		line_num++;
@@ -42,15 +44,11 @@ int main(int argc, char **argv)
 			opcode_error(fp, line, opcode, line_num, stack);
 		else if (global == -1)
 		{
-			fclose(fp);
-			free(line);
-			free_stack(stack);
+			free_close(fp, line, stack);
 			exit(EXIT_FAILURE);
 		}
 	}
-	fclose(fp);
-	free(line);
-	free_stack(stack);
+	free_close(fp, line, stack);
 	return (0);
 }
 
@@ -78,7 +76,8 @@ int validate_exec_opcode(char *opcode, stack_t **stack, int line_num)
 		{"div", divide},
 		{"mul", mul},
 		{"mod", mod},
-		{NULL, NULL}};
+		{NULL, NULL}
+		};
 
 	while (commands[i].opcode)
 	{
@@ -96,7 +95,7 @@ int validate_exec_opcode(char *opcode, stack_t **stack, int line_num)
 /**
  * free_stack - free doubly linked list
  * @head: pointer to head node
- */
+ **/
 void free_stack(stack_t *head)
 {
 	stack_t *temp, *node;
