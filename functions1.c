@@ -22,8 +22,8 @@ void push(stack_t **stack, unsigned int line_number)
 	new->prev = NULL;
 	if (*stack == NULL)
 	{
-		*stack = new;
 		new->next = NULL;
+		*stack = new;
 	}
 	else
 	{
@@ -42,10 +42,9 @@ void push(stack_t **stack, unsigned int line_number)
 void pall(stack_t **stack, unsigned int line_number)
 {
 	size_t num_nodes = 0;
-	const stack_t *current;
+	stack_t *current;
 
 	(void)line_number;
-
 	if (*stack == NULL || stack == NULL)
 		return;
 	current = *stack;
