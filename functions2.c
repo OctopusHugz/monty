@@ -4,8 +4,6 @@
  * add - adds top two elements of the stack
  * @stack: stack to add from
  * @line_number: line number of nop opcodei
- * @fp: file pointer
- * @line: line count
  **/
 void add(stack_t **stack, unsigned int line_number)
 {
