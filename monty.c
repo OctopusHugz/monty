@@ -73,6 +73,7 @@ int validate_exec_opcode(char *opcode, stack_t **stack, int line_num)
 		{"div", divide},
 		{"mul", mul},
 		{"mod", mod},
+		{"pchar", pchar},
 		{NULL, NULL}
 		};
 
