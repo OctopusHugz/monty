@@ -2,7 +2,8 @@
 
 /**
  * add_error - print error if stack is less than 2
- * @filename: file unable to open
+ * @line_number: line number of opcode
+ * @head: pointer to top of stack
  *
  */
 void add_error(int line_number, stack_t *head)
