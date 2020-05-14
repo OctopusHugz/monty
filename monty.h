@@ -70,5 +70,6 @@ void push_error(FILE *fp, char *line, int line_num, stack_t *head);
 
 void malloc_error(void);
 
-int stack_len(const stack_t *h);
+void add_error(int line_num, stack_t *head);
+
 #endif /* MONTY_H */
