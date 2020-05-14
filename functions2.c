@@ -9,7 +9,7 @@
  **/
 void add(stack_t **stack, unsigned int line_number)
 {
-	int sum = 0, num_nodes = stack_len(*stack);
+	int sum = 0, num_nodes = stack_size(*stack);
 
 	if (*stack == NULL || num_nodes < 2)
 		add_error(line_number, *stack);
@@ -35,25 +35,4 @@ void nop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;
-}
-
-/**
- * stack_len - counts number of elements in stack
- * @h: pointer to head of stack
- *
- * Return: number of elements in list
- */
-int stack_len(const stack_t *h)
-{
-	const stack_t *current;
-	int num_nodes = 0;
-
-	current = h;
-	while (current)
-	{
-		num_nodes++;
-		current = current->next;
-	}
-
-	return (num_nodes);
 }
