@@ -47,7 +47,7 @@ void pall(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 	if (*stack == NULL || stack == NULL)
 	{
-		global = -2;
+		global = -1;
 		return;
 	}
 	current = *stack;
@@ -72,7 +72,8 @@ void pint(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL || stack == NULL) /* MOVE TO ERRORS.C OR ERRORS2.C */
 	{
 		dprintf(STDERR_FILENO, "L%d: can't pint, stack empty\n", line_number);
-		exit(EXIT_FAILURE);
+		global = -1;
+		return;
 	}
 	printf("%d\n", (*stack)->n);
 }
@@ -90,7 +91,8 @@ void pop(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL) /* MOVE TO ERRORS.C OR ERRORS2.C */
 	{
 		dprintf(STDERR_FILENO, "L%d: can't pop an empty stack\n", line_number);
-		exit(EXIT_FAILURE);
+		global = -1;
+		return;
 	}
 	if (node->next)
 	{
@@ -118,8 +120,8 @@ void swap(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL) /* MOVE TO ERRORS.C OR ERRORS2.C */
 	{
 		dprintf(STDERR_FILENO, "L%d: can't swap, stack too short\n", line_number);
+		global = -1;
 		return;
-		/* exit(EXIT_FAILURE); */
 	}
 	second = top->next;
 	if (second)
@@ -146,7 +148,7 @@ void swap(stack_t **stack, unsigned int line_number)
 	}
 	else
 	{
-		/* ONLY 1 NODE IN LIST */
+		global = -1;
 		dprintf(STDERR_FILENO, "L%d: can't swap, stack too short\n", line_number);
 	}
 }
