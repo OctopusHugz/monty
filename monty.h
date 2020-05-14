@@ -60,6 +60,8 @@ void opcode_error(FILE *fp, char *line, char *opcode,
 
 void free_stack(stack_t *head);
 
+int stack_size(stack_t *stack);
+
 void push_error(FILE *fp, char *line, int line_num, stack_t *head);
 
 void malloc_error(void);

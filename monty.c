@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 	FILE *fp;
 	char *line = NULL, *delim = " \n\t\r\v\f", *arg, *opcode;
 	size_t len = 0;
-	int line_num = 0;
+	int line_num = 0, num_nodes = 0;
 	stack_t *stack = NULL;
 
 	if (argc < 2)
@@ -40,8 +40,14 @@ int main(int argc, char **argv)
 		}
 		if (validate_exec_opcode(opcode, &stack, line_num) != 1)
 			opcode_error(fp, line, opcode, line_num, stack);
-		if (strcmp(opcode, "swap") == 0)
-			continue; /* FREE LOGIC HERE IF IT FITS FLOW */
+		num_nodes = stack_size(stack);
+		if (strcmp(opcode, "swap") == 0 && num_nodes < 2)
+		{
+			fclose(fp);
+			free(line);
+			free_stack(stack);
+			exit(EXIT_FAILURE);
+		}
 	}
 	fclose(fp);
 	free(line);
@@ -99,4 +105,26 @@ void free_stack(stack_t *head)
 		node = node->next;
 		free(temp);
 	}
+}
+
+/**
+ * stack_size - returns number of nodes in the stack
+ * @head: pointer to head node
+ *
+ * Return: size of the stack in number of nodes
+ **/
+
+int stack_size(stack_t *head)
+{
+	stack_t *node = head;
+	int count = 0;
+
+	if (head == NULL)
+		return (count);
+	while (node)
+	{
+		count++;
+		node = node->next;
+	}
+	return (count);
 }
