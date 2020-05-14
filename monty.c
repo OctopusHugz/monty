@@ -12,7 +12,7 @@ int global;
 int main(int argc, char **argv)
 {
 	FILE *fp;
-	char *line = NULL, *delim = " \n\t\r\v\f", *arg, *opcode;
+	char *line = NULL, *delim = " ", *arg, *opcode;
 	size_t len = 0;
 	int line_num = 0, num_nodes = 0;
 	stack_t *stack = NULL;
