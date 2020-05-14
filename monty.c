@@ -26,7 +26,7 @@ int main(int argc, char **argv)
 	}
 	fp = fopen(argv[1], "r");
 	if (fp == NULL)
-		open_error(argv[1]);
+		malloc_error(argv[1]);
 	while (getline(&line, &len, fp) != -1)
 	{
 		line_num++;
