@@ -12,7 +12,10 @@ void add(stack_t **stack, unsigned int line_number)
 	int sum = 0, num_nodes = stack_size(*stack);
 
 	if (*stack == NULL || num_nodes < 2)
+	{
 		add_error(line_number, *stack);
+		return;
+	}
 
 	sum += (*stack)->n;
 	if (num_nodes > 2)
