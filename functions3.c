@@ -38,3 +38,16 @@ void mod(stack_t **stack, unsigned int line_number)
 
 	(*stack)->n = mod;
 }
+
+/**
+ * free_close - free list and close fp
+ * @fp: file pointer to close
+ * @line: line count
+ * @stack: stack to add from
+ **/
+void free_close(FILE *fp, char *line, stack_t *stack)
+{
+	fclose(fp);
+	free(line);
+	free_stack(stack);
+}
