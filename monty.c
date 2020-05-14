@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 		if (strcmp(line, "\n") == 0)
 			continue;
 		opcode = strtok(line, delim);
-		if (opcode == NULL)
+		if (opcode == NULL || opcode[0] == '#')
 			continue;
 		if (strcmp(opcode, "push") == 0)
 		{
