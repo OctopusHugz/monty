@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 	FILE *fp;
 	char *line = NULL, *delim = " \n", *arg, *opcode;
 	size_t len = 0;
-	int line_num = 0, num_nodes = 0;
+	int line_num = 0;
 	stack_t *stack = NULL;
 
 	if (argc < 2)
@@ -28,8 +28,6 @@ int main(int argc, char **argv)
 		line_num++;
 		if (strcmp(line, "\n") == 0)
 			continue;
-		if (strncmp(line, "\t", 1) == 0)
-			break;
 		opcode = strtok(line, delim);
 		if (opcode == NULL)
 			continue;
@@ -38,25 +36,11 @@ int main(int argc, char **argv)
 			arg = strtok(NULL, delim);
 			if ((arg == NULL) || (!isdigit(arg[0]) && arg[0] != '-'))
 				push_error(fp, line, line_num, stack);
-			else if (arg[0] == '-' && !isdigit(arg[1]))
-				push_error(fp, line, line_num, stack);
 			global = atoi(arg);
 		}
 		if (validate_exec_opcode(opcode, &stack, line_num) != 1)
 			opcode_error(fp, line, opcode, line_num, stack);
 		else if (global == -1)
-		{
-			fclose(fp);
-			free(line);
-			free_stack(stack);
-			exit(EXIT_FAILURE);
-		}
-		else if (global == -2)
-		{
-			continue;
-		}
-		num_nodes = stack_size(stack);
-		if ((strcmp(opcode, "swap") == 0 || strcmp(opcode, "add") == 0) && num_nodes < 2) /* TOO LONG */
 		{
 			fclose(fp);
 			free(line);
