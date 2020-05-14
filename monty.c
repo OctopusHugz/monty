@@ -40,6 +40,8 @@ int main(int argc, char **argv)
 		}
 		if (validate_exec_opcode(opcode, &stack, line_num) != 1)
 			opcode_error(fp, line, opcode, line_num, stack);
+		if (strcmp(opcode, "swap") == 0)
+			continue; /* FREE LOGIC HERE IF IT FITS FLOW */
 	}
 	fclose(fp);
 	free(line);
@@ -64,6 +66,7 @@ int validate_exec_opcode(char *opcode, stack_t **stack, int line_num)
 		{"pall", pall},
 		{"pint", pint},
 		{"pop", pop},
+		{"swap", swap},
 		{NULL, NULL}};
 
 	while (commands[i].opcode)
