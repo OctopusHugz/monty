@@ -28,6 +28,8 @@ int main(int argc, char **argv)
 		line_num++;
 		if (strcmp(line, "\n") == 0)
 			continue;
+		if (strncmp(line, "\t", 1) == 0)
+			break;
 		opcode = strtok(line, delim);
 		if (opcode == NULL)
 			continue;
@@ -48,6 +50,10 @@ int main(int argc, char **argv)
 			free(line);
 			free_stack(stack);
 			exit(EXIT_FAILURE);
+		}
+		else if (global == -2)
+		{
+			continue;
 		}
 		num_nodes = stack_size(stack);
 		if ((strcmp(opcode, "swap") == 0 || strcmp(opcode, "add") == 0) && num_nodes < 2) /* TOO LONG */
@@ -84,6 +90,10 @@ int validate_exec_opcode(char *opcode, stack_t **stack, int line_num)
 		{"swap", swap},
 		{"add", add},
 		{"nop", nop},
+		{"sub", sub},
+		{"div", divide},
+		{"mul", mul},
+		{"mod", mod},
 		{NULL, NULL}};
 
 	while (commands[i].opcode)
