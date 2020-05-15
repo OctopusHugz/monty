@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 	int line_num = 0;
 	stack_t *stack = NULL;
 
-	if (argc < 2)
+	if (argc != 2)
 		argc_error();
 	fp = fopen(argv[1], "r");
 	if (fp == NULL)
