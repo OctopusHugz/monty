@@ -14,7 +14,7 @@ void push(stack_t **stack, unsigned int line_number)
 	if (new == NULL)
 	{
 		malloc_error();
-		global = -1;
+		global = INT_MIN;
 		return;
 	}
 
@@ -67,7 +67,7 @@ void pint(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL || stack == NULL) /* MOVE TO ERRORS.C OR ERRORS2.C */
 	{
 		dprintf(STDERR_FILENO, "L%d: can't pint, stack empty\n", line_number);
-		global = -1;
+		global = INT_MIN;
 		return;
 	}
 	printf("%d\n", (*stack)->n);
@@ -86,7 +86,7 @@ void pop(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL) /* MOVE TO ERRORS.C OR ERRORS2.C */
 	{
 		dprintf(STDERR_FILENO, "L%d: can't pop an empty stack\n", line_number);
-		global = -1;
+		global = INT_MIN;
 		return;
 	}
 	if (node->next)
@@ -115,7 +115,7 @@ void swap(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL) /* MOVE TO ERRORS.C OR ERRORS2.C */
 	{
 		dprintf(STDERR_FILENO, "L%d: can't swap, stack too short\n", line_number);
-		global = -1;
+		global = INT_MIN;
 		return;
 	}
 	second = top->next;
@@ -143,7 +143,7 @@ void swap(stack_t **stack, unsigned int line_number)
 	}
 	else
 	{
-		global = -1;
+		global = INT_MIN;
 		dprintf(STDERR_FILENO, "L%d: can't swap, stack too short\n", line_number);
 	}
 }

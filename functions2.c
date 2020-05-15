@@ -12,7 +12,7 @@ void add(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL || num_nodes < 2)
 	{
 		add_error(line_number, *stack);
-		global = -1;
+		global = INT_MIN;
 		return;
 	}
 
@@ -45,7 +45,7 @@ void sub(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL || num_nodes < 2)
 	{
 		sub_error(line_number, *stack);
-		global = -1;
+		global = INT_MIN;
 		return;
 	}
 	diff = (*stack)->next->n;
@@ -66,7 +66,7 @@ void divide(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL || num_nodes < 2)
 	{
 		div_error(line_number, *stack);
-		global = -1;
+		global = INT_MIN;
 		return;
 	}
 
@@ -74,7 +74,7 @@ void divide(stack_t **stack, unsigned int line_number)
 	if ((*stack)->n == 0)
 	{
 		dprintf(STDERR_FILENO, "L%d: division by zero\n", line_number);
-		global = -1;
+		global = INT_MIN;
 		return;
 	}
 	quotient /= (*stack)->n;
@@ -94,7 +94,7 @@ void mul(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL || num_nodes < 2)
 	{
 		mul_error(line_number, *stack);
-		global = -1;
+		global = INT_MIN;
 		return;
 	}
 

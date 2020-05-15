@@ -6,6 +6,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <unistd.h>
+#include <limits.h>
 
 extern int global;
 

@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 		}
 		if (validate_exec_opcode(opcode, &stack, line_num) != 1)
 			opcode_error(fp, line, opcode, line_num, stack);
-		else if (global == -1 && strcmp(opcode, "push") != 0)
+		if (global == INT_MIN)
 		{
 			free_close(fp, line, stack);
 			exit(EXIT_FAILURE);
