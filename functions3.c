@@ -82,7 +82,7 @@ void pstr(stack_t **stack, unsigned int line_number)
 	}
 	while (node)
 	{
-		if (node->n == 0 || node->n < 32 || node->n > 132)
+		if (node->n == 0 || node->n < 32 || node->n > 127)
 			break;
 		array[i] = node->n;
 		printf("%c", array[i]);
