@@ -96,7 +96,7 @@ void pstr(stack_t **stack, unsigned int line_number)
 /**
  * rotl - rotates stack to the top
  * @stack: stack to add from
- * @line_number: line number of sub opcode* @line: line count
+ * @line_number: line number of sub opcode
  **/
 void rotl(stack_t **stack, unsigned int line_number)
 {
