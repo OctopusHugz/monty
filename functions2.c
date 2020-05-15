@@ -50,7 +50,6 @@ void sub(stack_t **stack, unsigned int line_number)
 	}
 	diff = (*stack)->next->n;
 	diff -= (*stack)->n;
-	printf("diff is: %d\n", diff);
 	(*stack)->next->n = diff;
 	pop(stack, line_number);
 }
