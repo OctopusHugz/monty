@@ -92,3 +92,25 @@ void pstr(stack_t **stack, unsigned int line_number)
 	}
 	putchar('\n');
 }
+
+/**
+ * rotl - rotates stack to the top
+ * @stack: stack to add from
+ * @line_number: line number of sub opcode* @line: line count
+ **/
+void rotl(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tail, *top;
+	(void)line_number;
+	if (*stack == NULL)
+		return;
+	top = *stack;
+	tail = *stack;
+	while (tail && tail->next)
+		tail = tail->next;
+	*stack = top->next;
+	tail->next = top;
+	top->prev = tail;
+	(*stack)->prev = NULL;
+	top->next = NULL;
+}
