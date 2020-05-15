@@ -71,7 +71,7 @@ void divide(stack_t **stack, unsigned int line_number)
 	}
 
 	quotient = (*stack)->next->n;
-	if (quotient == 0)
+	if ((*stack)->n == 0)
 	{
 		dprintf(STDERR_FILENO, "L%d: division by zero\n", line_number);
 		global = -1;
