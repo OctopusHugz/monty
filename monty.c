@@ -76,6 +76,7 @@ int validate_exec_opcode(char *opcode, stack_t **stack, int line_num)
 		{"pchar", pchar},
 		{"pstr", pstr},
 		{"rotl", rotl},
+		{"rotr", rotr},
 		{NULL, NULL}
 		};
 
