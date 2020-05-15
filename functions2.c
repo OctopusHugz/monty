@@ -48,11 +48,11 @@ void sub(stack_t **stack, unsigned int line_number)
 		global = -1;
 		return;
 	}
-
-	diff = (*stack)->n;
-	pop(stack, line_number);
+	diff = (*stack)->next->n;
 	diff -= (*stack)->n;
-	(*stack)->n = diff;
+	printf("diff is: %d\n", diff);
+	(*stack)->next->n = diff;
+	pop(stack, line_number);
 }
 
 /**
