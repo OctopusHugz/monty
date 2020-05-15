@@ -77,9 +77,9 @@ void divide(stack_t **stack, unsigned int line_number)
 		global = -1;
 		return;
 	}
+	quotient /= (*stack)->next->n;
+	(*stack)->next->n = quotient;
 	pop(stack, line_number);
-	quotient /= (*stack)->n;
-	(*stack)->n = quotient;
 }
 
 /**
