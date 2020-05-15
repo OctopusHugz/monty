@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 		if (strcmp(opcode, "push") == 0)
 		{
 			arg = strtok(NULL, delim);
-			if ((arg == NULL) || (!isdigit(arg[0]) && arg[0] != '-'))
+			if (num_parser(arg) == -1)
 				push_error(fp, line, line_num, stack);
 			global = atoi(arg);
 		}
@@ -138,4 +138,27 @@ int stack_size(stack_t *head)
 		node = node->next;
 	}
 	return (count);
+}
+
+/**
+ * num_parser - checks string for non-integer characters
+ * @number: string to check
+ *
+ * Return: 1 if valid, or -1 if invalid
+ **/
+
+int num_parser(char *number)
+{
+	int valid = 1, i = 0;
+
+	if (number == NULL)
+		return (-1);
+
+	while (number[i])
+	{
+		if ((number[i] < '0' || number[i] > '9') && number[i] != '-')
+			return (-1);
+		i++;
+	}
+	return (valid);
 }
