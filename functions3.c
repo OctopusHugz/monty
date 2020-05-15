@@ -101,8 +101,10 @@ void pstr(stack_t **stack, unsigned int line_number)
 void rotl(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tail, *top;
+	int num_nodes = stack_size(*stack);
+
 	(void)line_number;
-	if (*stack == NULL)
+	if (*stack == NULL || num_nodes < 2)
 		return;
 	top = *stack;
 	tail = *stack;
