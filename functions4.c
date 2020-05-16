@@ -23,3 +23,35 @@ void rotr(stack_t **stack, unsigned int line_number)
 	tail->prev = NULL;
 	*stack = tail;
 }
+
+/**
+ * push_queue - push node innto queue
+ * @stack: stack of nodes
+ * @line_number: line number of opcode
+ **/
+
+void push_queue(stack_t **stack, unsigned int line_number)
+{
+	stack_t *new = malloc(sizeof(stack_t)), *tail = *stack;
+
+	(void)line_number;
+	if (new == NULL)
+	{
+		malloc_error();
+		global = INT_MIN;
+		return;
+	}
+
+	new->n = global;
+	new->prev = NULL;
+	new->next = NULL;
+	if (*stack == NULL)
+		*stack = new;
+	else
+	{
+		while (tail && tail->next)
+			tail = tail->next;
+		new->prev = tail;
+		tail->next = new;
+	}
+}

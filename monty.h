@@ -99,6 +99,8 @@ void rotl(stack_t **stack, unsigned int line_number);
 
 void rotr(stack_t **stack, unsigned int line_number);
 
+void push_queue(stack_t **stack, unsigned int line_number);
+
 int num_parser(char *number);
 
 #endif /* MONTY_H */
