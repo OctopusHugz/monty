@@ -2,11 +2,11 @@
 int global;
 
 /**
- * main - runs the monty program
+ * main - runs the monty bytecode interpreter program
  * @argc: number of arguments to the program
- * @argv: 2D array containing arguments as strings
+ * @argv: array containing arguments as strings
  *
- * Return: 0 if success, nonzero otherwise
+ * Return: 0 if success, otherwise exit with EXIT_FAILURE before end of program
  **/
 
 int main(int argc, char **argv)
@@ -59,7 +59,7 @@ int main(int argc, char **argv)
  * @stack: pointer to stack structure
  * @line_num: line number of opcode instruction
  *
- * Return: 1 if true, -1 otherwise
+ * Return: 1 if opcode is valid, -1 otherwise
  **/
 
 int validate_exec_opcode(char *opcode, stack_t **stack, int line_num)
@@ -107,16 +107,17 @@ int validate_exec_opcode(char *opcode, stack_t **stack, int line_num)
 }
 
 /**
- * free_stack - free doubly linked list
- * @head: pointer to head node
+ * free_stack - free doubly linked list consisting of stack elements
+ * @top: pointer to top of stack
  **/
-void free_stack(stack_t *head)
+
+void free_stack(stack_t *top)
 {
 	stack_t *temp, *node;
 
-	if (head == NULL)
+	if (top == NULL)
 		return;
-	node = head;
+	node = top;
 	while (node)
 	{
 		temp = node;
@@ -126,18 +127,18 @@ void free_stack(stack_t *head)
 }
 
 /**
- * stack_size - returns number of nodes in the stack
- * @head: pointer to head node
+ * stack_size - finds the size of the stack
+ * @top: pointer to top of stack
  *
- * Return: size of the stack in number of nodes
+ * Return: number of nodes in the stack
  **/
 
-int stack_size(stack_t *head)
+int stack_size(stack_t *top)
 {
-	stack_t *node = head;
+	stack_t *node = top;
 	int count = 0;
 
-	if (head == NULL)
+	if (top == NULL)
 		return (count);
 	while (node)
 	{

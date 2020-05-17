@@ -2,9 +2,10 @@
 
 /**
  * mod - divides top two elements of the stack and returns remainder
- * @stack: stack to add from
- * @line_number: line number of sub opcode
+ * @stack: pointer to stack to modulo from
+ * @line_number: line number of mod opcode
  **/
+
 void mod(stack_t **stack, unsigned int line_number)
 {
 	int mod = 0, num_nodes = stack_size(*stack);
@@ -28,11 +29,13 @@ void mod(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * free_close - free list and close fp
+ * free_close - frees stack structure and buffer
+ * from getline, and closes file pointer
  * @fp: file pointer to close
- * @line: line count
+ * @line: buffer from getline to free
  * @stack: stack to add from
  **/
+
 void free_close(FILE *fp, char *line, stack_t *stack)
 {
 	fclose(fp);
@@ -41,10 +44,11 @@ void free_close(FILE *fp, char *line, stack_t *stack)
 }
 
 /**
- * pchar - print character to top of the stack
- * @stack: stack to add from
- * @line_number: line number of sub opcode* @line: line count
+ * pchar - push character to top of the stack
+ * @stack: pointer to stack structure to push character to
+ * @line_number: line number of pchar opcode
  **/
+
 void pchar(stack_t **stack, unsigned int line_number)
 {
 	if (*stack == NULL)
@@ -56,7 +60,7 @@ void pchar(stack_t **stack, unsigned int line_number)
 	else if ((*stack)->n > 127 || (*stack)->n < 32)
 	{
 		dprintf(STDERR_FILENO,
-		"L%d: can't pchar, value out of range\n", line_number);
+				"L%d: can't pchar, value out of range\n", line_number);
 		global = INT_MIN;
 		return;
 	}
@@ -64,10 +68,11 @@ void pchar(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * pstr - print character to top of the stack
- * @stack: stack to add from
- * @line_number: line number of sub opcode* @line: line count
+ * pstr - print string from the stack
+ * @stack: pointer to stack structure to print string from
+ * @line_number: line number of pstr opcode
  **/
+
 void pstr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *node = *stack;
@@ -93,10 +98,11 @@ void pstr(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * rotl - rotates stack to the top
- * @stack: stack to add from
- * @line_number: line number of sub opcode
+ * rotl - rotates stack to the top (left)
+ * @stack: pointer to stack structure to rotl
+ * @line_number: line number of rotl opcode
  **/
+
 void rotl(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tail, *top;

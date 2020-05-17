@@ -2,9 +2,10 @@
 
 /**
  * rotr - rotates stack to the bottom
- * @stack: stack to rotate from
- * @line_number: line number of sub opcode
+ * @stack: pointer to stack to rotr
+ * @line_number: line number of rotr opcode
  **/
+
 void rotr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tail, *top;
@@ -25,9 +26,9 @@ void rotr(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * push_queue - push node innto queue
- * @stack: stack of nodes
- * @line_number: line number of opcode
+ * push_queue - push node into queue using tail
+ * @stack: pointer to stack structure to push onto tail of
+ * @line_number: line number of push opcode
  **/
 
 void push_queue(stack_t **stack, unsigned int line_number)
@@ -61,7 +62,8 @@ void push_queue(stack_t **stack, unsigned int line_number)
  * @opcode: string to check
  * @mode: current mode of the linked list (stack or queue)
  *
- * Return: stack or queue if mode needs to change, or NULL if not
+ * Return: 1 if command has no errors, -1 if mode needs to change,
+ * or 0 if opcode is NULL or a comment line
  **/
 
 int opcode_parser(char *opcode, char *mode)
@@ -85,8 +87,8 @@ int opcode_parser(char *opcode, char *mode)
 }
 
 /**
- * mode_switcher - switches mode
- * @mode: current mode of the linked list (stack or queue)
+ * mode_switcher - switches mode from FIFO TO LIFO or from LIFO to FIFO
+ * @mode: current mode of the linked list (stack or queue, LIFO or FIFO)
  *
  * Return: switched mode
  **/

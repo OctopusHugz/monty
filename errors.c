@@ -1,10 +1,11 @@
 #include "monty.h"
 
 /**
- * open_error - if unable to open file, prints error
- * @filename: file unable to open
+ * open_error - prints error if unable to open file
+ * @filename: name of file program was unable to open
  *
- */
+ **/
+
 void open_error(char *filename)
 {
 	dprintf(STDERR_FILENO, "Error: Can't open file %s\n", filename);
@@ -12,7 +13,7 @@ void open_error(char *filename)
 }
 
 /**
- * argc_error - prints usage error message
+ * argc_error - prints argc usage error message
  **/
 
 void argc_error(void)
@@ -23,39 +24,40 @@ void argc_error(void)
 
 /**
  * opcode_error - prints error when opcode invalid
- * @fp: file attempted to open
- * @line: line count
+ * @fp: pointer to file the program attempted to open
+ * @line: pointer to buffer storing string from getline
  * @opcode: opcode searched for
  * @line_num: line num of invalid opcode
- * @head: pointer to head/top of the stack
+ * @top: pointer to top of the stack
  *
- */
+ **/
+
 void opcode_error(FILE *fp, char *line, char *opcode,
-				  int line_num, stack_t *head)
+				  int line_num, stack_t *top)
 {
 
 	dprintf(STDERR_FILENO, "L%d: unknown instruction %s\n", line_num, opcode);
 	fclose(fp);
 	free(line);
-	free_stack(head);
+	free_stack(top);
 	exit(EXIT_FAILURE);
 }
 
 /**
  * push_error - prints push error message
- * @fp: file pointer
- * @line: line count
- * @line_num: line num of invalid push opcode
- * @head: pointer to top of the stack
+ * @fp: pointer to file the program attempted to open
+ * @line: pointer to buffer storing string from getline
+ * @line_num: line num of invalid push
+ * @top: pointer to top of the stack
  *
  **/
 
-void push_error(FILE *fp, char *line, int line_num, stack_t *head)
+void push_error(FILE *fp, char *line, int line_num, stack_t *top)
 {
 	dprintf(STDERR_FILENO, "L%d: usage: push integer\n", line_num);
 	fclose(fp);
 	free(line);
-	free_stack(head);
+	free_stack(top);
 	exit(EXIT_FAILURE);
 }
 

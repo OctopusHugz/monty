@@ -2,9 +2,10 @@
 
 /**
  * add - adds top two elements of the stack
- * @stack: stack to add from
+ * @stack: pointer to stack structure to add from
  * @line_number: line number of add opcode
  **/
+
 void add(stack_t **stack, unsigned int line_number)
 {
 	int sum = 0, num_nodes = stack_size(*stack);
@@ -23,10 +24,11 @@ void add(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * nop - does nothing
- * @stack: stack to do nothing from
+ * nop - no operation performed
+ * @stack: pointer to stack structure
  * @line_number: line number of nop opcode
  **/
+
 void nop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
@@ -35,9 +37,10 @@ void nop(stack_t **stack, unsigned int line_number)
 
 /**
  * sub - subtracts top two elements of the stack
- * @stack: stack to add from
+ * @stack: pointer to stack structure to subtract from
  * @line_number: line number of sub opcode
  **/
+
 void sub(stack_t **stack, unsigned int line_number)
 {
 	int diff = 0, num_nodes = stack_size(*stack);
@@ -56,9 +59,10 @@ void sub(stack_t **stack, unsigned int line_number)
 
 /**
  * divide - divides top two elements of the stack
- * @stack: stack to add from
- * @line_number: line number of sub opcode
+ * @stack: pointer to stack structure to divide from
+ * @line_number: line number of divide opcode
  **/
+
 void divide(stack_t **stack, unsigned int line_number)
 {
 	int quotient = 0, num_nodes = stack_size(*stack);
@@ -84,9 +88,10 @@ void divide(stack_t **stack, unsigned int line_number)
 
 /**
  * mul - multiplies top two elements of the stack
- * @stack: stack to add from
+ * @stack: pointer to stack structure to multiply from
  * @line_number: line number of sub opcode
  **/
+
 void mul(stack_t **stack, unsigned int line_number)
 {
 	int result = 0, num_nodes = stack_size(*stack);

@@ -8,6 +8,8 @@
 #include <unistd.h>
 #include <limits.h>
 
+/* Global variable declaration */
+
 extern int global;
 
 /**
@@ -18,7 +20,8 @@ extern int global;
  *
  * Description: doubly linked list node structure
  * for stack, queues, LIFO, FIFO Holberton project
- */
+ **/
+
 typedef struct stack_s
 {
 	int n;
@@ -33,14 +36,27 @@ typedef struct stack_s
  *
  * Description: opcode and its function
  * for stack, queues, LIFO, FIFO Holberton project
- */
+ **/
+
 typedef struct instruction_s
 {
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-int validate_exec_opcode(char *opcode, stack_t **stack, int line_num);
+/* Parsing Functions */
+
+int opcode_parser(char *opcode, char *mode);
+
+int num_parser(char *number);
+
+/* Helper Functions */
+
+char *mode_switcher(char *mode);
+
+int stack_size(stack_t *stack);
+
+/* Opcode Functions */
 
 void push(stack_t **stack, unsigned int line_number);
 
@@ -64,33 +80,6 @@ void mul(stack_t **stack, unsigned int line_number);
 
 void mod(stack_t **stack, unsigned int line_number);
 
-void open_error(char *filename);
-
-void argc_error(void);
-
-void opcode_error(FILE *fp, char *line, char *opcode,
-				  int line_num, stack_t *head);
-
-void free_stack(stack_t *head);
-
-int stack_size(stack_t *stack);
-
-void push_error(FILE *fp, char *line, int line_num, stack_t *head);
-
-void malloc_error(void);
-
-void add_error(int line_num, stack_t *head);
-
-void sub_error(int line_num, stack_t *head);
-
-void div_error(int line_num, stack_t *head);
-
-void mul_error(int line_num, stack_t *head);
-
-void mod_error(int line_num, stack_t *head);
-
-void free_close(FILE *fp, char *line, stack_t *stack);
-
 void pchar(stack_t **stack, unsigned int line_number);
 
 void pstr(stack_t **stack, unsigned int line_number);
@@ -101,10 +90,37 @@ void rotr(stack_t **stack, unsigned int line_number);
 
 void push_queue(stack_t **stack, unsigned int line_number);
 
-int num_parser(char *number);
+/* Opcode Validation and Execution */
 
-int opcode_parser(char *opcode, char *mode);
+int validate_exec_opcode(char *opcode, stack_t **stack, int line_num);
 
-char *mode_switcher(char *mode);
+/* Error Functions */
+
+void argc_error(void);
+
+void open_error(char *filename);
+
+void opcode_error(FILE *fp, char *line, char *opcode,
+				  int line_num, stack_t *top);
+
+void push_error(FILE *fp, char *line, int line_num, stack_t *top);
+
+void malloc_error(void);
+
+void add_error(int line_num, stack_t *top);
+
+void sub_error(int line_num, stack_t *top);
+
+void div_error(int line_num, stack_t *top);
+
+void mul_error(int line_num, stack_t *top);
+
+void mod_error(int line_num, stack_t *top);
+
+/* Free/Cleanup Functions */
+
+void free_stack(stack_t *top);
+
+void free_close(FILE *fp, char *line, stack_t *stack);
 
 #endif /* MONTY_H */
