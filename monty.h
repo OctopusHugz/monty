@@ -103,4 +103,8 @@ void push_queue(stack_t **stack, unsigned int line_number);
 
 int num_parser(char *number);
 
+int opcode_parser(char *opcode, char *mode);
+
+char *mode_switcher(char *mode);
+
 #endif /* MONTY_H */

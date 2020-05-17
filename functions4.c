@@ -55,3 +55,49 @@ void push_queue(stack_t **stack, unsigned int line_number)
 		tail->next = new;
 	}
 }
+
+/**
+ * opcode_parser - checks string for specific opcodes
+ * @opcode: string to check
+ * @mode: current mode of the linked list (stack or queue)
+ *
+ * Return: stack or queue if mode needs to change, or NULL if not
+ **/
+
+int opcode_parser(char *opcode, char *mode)
+{
+	int status = 1;
+
+	(void)mode;
+	if (opcode == NULL || opcode[0] == '#')
+		return (0);
+	else if (strcmp(opcode, "queue") == 0)
+	{
+		if (strcmp(mode, "stack") == 0)
+			status = -1;
+	}
+	else if (strcmp(opcode, "stack") == 0)
+	{
+		if (strcmp(mode, "queue") == 0)
+			status = -1;
+	}
+	return (status);
+}
+
+/**
+ * mode_switcher - switches mode
+ * @mode: current mode of the linked list (stack or queue)
+ *
+ * Return: switched mode
+ **/
+
+char *mode_switcher(char *mode)
+{
+	char *fifo = "queue", *lifo = "stack";
+
+	if (strcmp(mode, "stack") == 0)
+		mode = fifo;
+	else
+		mode = lifo;
+	return (mode);
+}

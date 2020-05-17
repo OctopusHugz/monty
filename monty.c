@@ -12,36 +12,25 @@ int global;
 int main(int argc, char **argv)
 {
 	FILE *fp;
-	char *line = NULL, *delim = " \n", *arg, *opcode, *mode, *fifo = "queue", *lifo = "stack";
+	char *line = NULL, *delim = " \n", *arg, *opcode, *mode = "stack";
 	size_t len = 0;
-	int line_num = 0;
+	int line_num = 0, p_status = 0;
 	stack_t *stack = NULL;
 
-	(void)fifo;
 	if (argc != 2)
 		argc_error();
 	fp = fopen(argv[1], "r");
 	if (fp == NULL)
 		open_error(argv[1]);
-	mode = lifo;
 	while (getline(&line, &len, fp) != -1)
 	{
-		/* printf("L%d: Mode is: %s\n", line_num, mode); */
 		line_num++;
 		if (strcmp(line, "\n") == 0)
 			continue;
-		opcode = strtok(line, delim);
-		if (strcmp(opcode, "queue") == 0)
-		{
-			mode = fifo;
-			continue;
-		}
-		if (strcmp(opcode, "stack") == 0)
-		{
-			mode = lifo;
-			continue;
-		}
-		if (opcode == NULL || opcode[0] == '#')
+		opcode = strtok(line, delim), p_status = opcode_parser(opcode, mode);
+		if (p_status == -1)
+			mode = mode_switcher(mode);
+		if (p_status != 1)
 			continue;
 		if (strcmp(opcode, "push") == 0)
 		{
@@ -49,18 +38,8 @@ int main(int argc, char **argv)
 			if (num_parser(arg) == -1)
 				push_error(fp, line, line_num, stack);
 			global = atoi(arg);
-			if (strcmp(mode, "stack") == 0)
-			{
-				/* printf("strcmp'd and found out mode is stack, so running normal push\n"); */
-				validate_exec_opcode("push", &stack, line_num);
-				continue;
-			}
-			else
-			{
-				/* printf("strcmp'd and found out mode is NOT stack, so running push_queue\n"); */
-				validate_exec_opcode("push_queue", &stack, line_num);
-				continue;
-			}
+			if (strcmp(mode, "queue") == 0)
+				opcode = "push_queue";
 		}
 		if (validate_exec_opcode(opcode, &stack, line_num) != 1)
 			opcode_error(fp, line, opcode, line_num, stack);
@@ -105,7 +84,8 @@ int validate_exec_opcode(char *opcode, stack_t **stack, int line_num)
 		{"stack", nop},
 		{"queue", nop},
 		{"push_queue", push_queue},
-		{NULL, NULL}};
+		{NULL, NULL}
+	};
 
 	while (commands[i].opcode)
 	{
