@@ -84,8 +84,7 @@ int validate_exec_opcode(char *opcode, stack_t **stack, int line_num)
 		{"stack", nop},
 		{"queue", nop},
 		{"push_queue", push_queue},
-		{NULL, NULL}
-	};
+		{NULL, NULL}};
 
 	while (commands[i].opcode)
 	{
@@ -101,71 +100,6 @@ int validate_exec_opcode(char *opcode, stack_t **stack, int line_num)
 			valid = 1;
 			break;
 		}
-		i++;
-	}
-	return (valid);
-}
-
-/**
- * free_stack - free doubly linked list consisting of stack elements
- * @top: pointer to top of stack
- **/
-
-void free_stack(stack_t *top)
-{
-	stack_t *temp, *node;
-
-	if (top == NULL)
-		return;
-	node = top;
-	while (node)
-	{
-		temp = node;
-		node = node->next;
-		free(temp);
-	}
-}
-
-/**
- * stack_size - finds the size of the stack
- * @top: pointer to top of stack
- *
- * Return: number of nodes in the stack
- **/
-
-int stack_size(stack_t *top)
-{
-	stack_t *node = top;
-	int count = 0;
-
-	if (top == NULL)
-		return (count);
-	while (node)
-	{
-		count++;
-		node = node->next;
-	}
-	return (count);
-}
-
-/**
- * num_parser - checks string for non-integer characters
- * @number: string to check
- *
- * Return: 1 if valid, or -1 if invalid
- **/
-
-int num_parser(char *number)
-{
-	int valid = 1, i = 0;
-
-	if (number == NULL)
-		return (-1);
-
-	while (number[i])
-	{
-		if ((number[i] < '0' || number[i] > '9') && number[i] != '-')
-			return (-1);
 		i++;
 	}
 	return (valid);

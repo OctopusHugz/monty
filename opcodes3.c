@@ -29,21 +29,6 @@ void mod(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * free_close - frees stack structure and buffer
- * from getline, and closes file pointer
- * @fp: file pointer to close
- * @line: buffer from getline to free
- * @stack: stack to add from
- **/
-
-void free_close(FILE *fp, char *line, stack_t *stack)
-{
-	fclose(fp);
-	free(line);
-	free_stack(stack);
-}
-
-/**
  * pchar - push character to top of the stack
  * @stack: pointer to stack structure to push character to
  * @line_number: line number of pchar opcode
@@ -120,4 +105,29 @@ void rotl(stack_t **stack, unsigned int line_number)
 	top->prev = tail;
 	(*stack)->prev = NULL;
 	top->next = NULL;
+}
+
+/**
+ * rotr - rotates stack to the bottom
+ * @stack: pointer to stack to rotr
+ * @line_number: line number of rotr opcode
+ **/
+
+void rotr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tail, *top;
+	int num_nodes = stack_size(*stack);
+
+	(void)line_number;
+	if (*stack == NULL || num_nodes < 2)
+		return;
+	top = *stack;
+	tail = *stack;
+	while (tail && tail->next)
+		tail = tail->next;
+	top->prev = tail;
+	tail->next = top;
+	tail->prev->next = NULL;
+	tail->prev = NULL;
+	*stack = tail;
 }
